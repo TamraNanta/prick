@@ -137,6 +137,16 @@ def print_welcome_message():
     minutes, seconds = divmod(remainder, 60)
     print(Fore.CYAN + Style.BRIGHT + f"Up time bot: {int(days)} hari, {int(hours)} jam, {int(minutes)} menit, {int(seconds)} detik")
 
+def animated_loading(duration):
+    frames = ["|", "/", "-", "\\"]
+    end_time = time.time() + duration
+    while time.time() < end_time:
+        remaining_time = int(end_time - time.time())
+        for frame in frames:
+            print(f"\rMenunggu waktu claim berikutnya {frame} - Tersisa {remaining_time} detik         ", end="", flush=True)
+            time.sleep(0.25)
+    print("\rMenunggu waktu claim berikutnya selesai.                            ", flush=True)     
+
     
 def main():
     uri = "wss://api.prick.lol/ws"
@@ -155,6 +165,6 @@ def main():
             asyncio.new_event_loop().run_until_complete(process_subprotocol(subprotocol, uri, headers))
         
         print(f"{Fore.BLUE+Style.BRIGHT}========= [ {Fore.WHITE+Style.BRIGHT}ALL DONE{Fore.BLUE+Style.BRIGHT} ] =========\n")
-        time.sleep(10)
+        animated_loading(300)
 if __name__ == "__main__":
     main()
