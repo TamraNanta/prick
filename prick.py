@@ -2,7 +2,6 @@ import websockets
 import json
 import time
 import asyncio
-import threading
 from colorama import init, Fore, Style
 init(autoreset=True)
 import requests  # Tambahkan ini di bagian import
